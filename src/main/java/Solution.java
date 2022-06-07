@@ -1,8 +1,9 @@
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Solution {
-    
+
     public static int getResult(String playField, String creature)
             throws NullPointerException, IllegalArgumentException {
 
@@ -46,7 +47,11 @@ public class Solution {
                     throw new IllegalArgumentException("string length playField must be " + FIELD_SIZE + " characters");
                 }
                 // validation of playField chars
-                if (playField.chars().anyMatch(ch -> ch != 'S' && ch != 'W' && ch != 'T' && ch != 'P')) {
+                if (Arrays.stream(playField.split("")).anyMatch(s ->
+                        !Objects.equals(s, SWAMP) &&
+                        !Objects.equals(s, WATER) &&
+                        !Objects.equals(s, TREE) &&
+                        !Objects.equals(s, PLAIN))) {
                     throw new IllegalArgumentException("playingField chars is not valid");
                 }
                 // change string to array digits
